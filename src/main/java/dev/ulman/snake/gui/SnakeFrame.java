@@ -1,10 +1,8 @@
 package dev.ulman.snake.gui;
 
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 
-import dev.ulman.snake.graphics.Screen;
+import dev.ulman.snake.graphics.Board;
 
 public class SnakeFrame extends JFrame {
 
@@ -12,7 +10,7 @@ public class SnakeFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Snake");
 		setResizable(false);
-		setLocationRelativeTo(null);
+		setLocationByPlatform(true);
 		setVisible(true);
 
 		init();
@@ -20,11 +18,9 @@ public class SnakeFrame extends JFrame {
 	}
 
 	public void init() {
-		setLayout(new GridLayout(1, 1, 0, 0));
+		Board board = new Board();
 
-		Screen screen = new Screen();
-
-		add(screen);
+		add(board);
 		pack();
 	}
 

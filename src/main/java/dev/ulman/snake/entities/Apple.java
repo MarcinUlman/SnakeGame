@@ -2,47 +2,43 @@ package dev.ulman.snake.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
+
+import org.javatuples.Pair;
 
 public class Apple {
 
-	private int xCoor, yCoor, width, height;
+	private Pair<Integer, Integer> coordinates;
+	private int tileSize;
+	Color color;
 
-	public Apple(int xCoor, int yCoor, int tileSize) {
+	public Apple(int tileSize, int boardSize) {
 		super();
-		this.xCoor = xCoor;
-		this.yCoor = yCoor;
-		this.width = tileSize;
-		this.height = tileSize;
+		put(boardSize);
+		this.tileSize = tileSize;
+		setColor();
 	}
-	
-	public void tick() {
-		
+
+	private void put(int boardSize) {
+		Random random = new Random();
+		int xCoor = random.nextInt(boardSize);
+		int yCoor = random.nextInt(boardSize);
+		this.coordinates = new Pair<Integer, Integer>(xCoor, yCoor);
 	}
-	
-	
+
 	public void draw(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect(xCoor * width, yCoor * height, width, height);
+		g.setColor(color);
+		int arc = (int) (0.5 * tileSize);
+		g.fillRoundRect(coordinates.getValue0() * tileSize, coordinates.getValue1() * tileSize, tileSize, tileSize, arc,
+				arc);
 	}
 
-	public int getxCoor() {
-		return xCoor;
+	private void setColor() {
+		Random randColor = new Random();
+		this.color = new Color(randColor.nextInt(255), randColor.nextInt(255), randColor.nextInt(255));
 	}
 
-	public void setxCoor(int xCoor) {
-		this.xCoor = xCoor;
+	public Pair<Integer, Integer> getCoordinates() {
+		return coordinates;
 	}
-
-	public int getyCoor() {
-		return yCoor;
-	}
-
-	public void setyCoor(int yCoor) {
-		this.yCoor = yCoor;
-	}
-	
-	
-	
-	
-	
 }

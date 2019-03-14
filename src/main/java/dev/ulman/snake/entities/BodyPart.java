@@ -3,37 +3,49 @@ package dev.ulman.snake.entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import org.javatuples.Pair;
+
 public class BodyPart {
 
-	private int xCoor, yCoor;
+	private Pair<Integer, Integer> coordinates;
 	private int width, height;
+	private Color color = Color.GREEN;
 
 	public BodyPart(int xCoor, int yCoor, int tileSize) {
-		this.xCoor = xCoor;
-		this.yCoor = yCoor;
 		this.width = tileSize;
 		this.height = tileSize;
+		this.coordinates = new Pair<Integer, Integer>(xCoor, yCoor);
 	}
-	
-	public void tick() {
-		
-	}
-	
+
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(xCoor * width, yCoor * height, width, height);
-		g.setColor(Color.GREEN);
-		g.fillRect(xCoor * width + 2, yCoor * height + 2, width - 2, height - 4);
+		g.drawOval(coordinates.getValue0() * width, coordinates.getValue1() * height, width, height);
+		g.setColor(color);
+		g.fillOval(coordinates.getValue0() * width, coordinates.getValue1() * height, width, height);
 	}
 
 	public int getxCoor() {
-		return xCoor;
+		return coordinates.getValue0();
+	}
+	
+	public void setxCoor(int xCoor) {
+		this.coordinates = this.coordinates.setAt0(xCoor);
 	}
 
 	public int getyCoor() {
-		return yCoor;
+		return coordinates.getValue1();
+	}
+
+	public void setyCoor(int yCoor) {
+		this.coordinates = this.coordinates.setAt1(yCoor);
 	}
 	
+	public void setColor(Color color) {
+		this.color = color;
+	}
 	
+	public Pair<Integer, Integer> getCoordinates() {
+		return coordinates;
+	}
 	
 }
