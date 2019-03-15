@@ -17,15 +17,9 @@ import org.javatuples.Pair;
 
 import dev.ulman.snake.entities.Apple;
 import dev.ulman.snake.entities.Snake;
+import dev.ulman.snake.gui.GameOverDialogFrame;
 
 public class Board extends JPanel implements ActionListener {
-	// przerobic podawanie wspolrzednych wszedzie na Pair
-
-	// dodać okno z wynikiem
-	// dodac opcje predkosci
-	// dodac pojawianie sie dodakotych jadlek
-	// spradzic opcje grafik zamiast elips
-	// dodac opacje wilkosci planszy zarownoe rozdzielczosci jak i ilosci pol
 
 	private static final long serialVersionUID = 1L;
 
@@ -114,7 +108,7 @@ public class Board extends JPanel implements ActionListener {
 		Pair<Integer, Integer> snakeHead = snake.getBodyCoordinates(0);
 		if (snakeHead.getValue0() < 0 || snakeHead.getValue0() >= size || snakeHead.getValue1() < 0
 				|| snakeHead.getValue1() >= size) {
-			System.out.println("game over");
+			GameOverDialogFrame endGameDialog = new GameOverDialogFrame(snake.getEatedApples());
 			running = false;
 		} else if (!board.get(snakeHead)) {
 			if (apples.get(0).getCoordinates().equals(snakeHead)) {
@@ -122,7 +116,7 @@ public class Board extends JPanel implements ActionListener {
 				snake.eatApple(apples.get(0).getCoordinates());
 				apples.remove(0);
 			} else {
-				System.out.println("game over");
+				GameOverDialogFrame endGameDialog = new GameOverDialogFrame(snake.getEatedApples());
 				running = false;
 			}
 		}
