@@ -1,6 +1,5 @@
 package dev.ulman.snake.graphics;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ public class Board extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	private static final int WIDTH = 800, HEIGHT = WIDTH; // board size
-	private int size = 10; // game size
+	private int size = 25; // game size
 	private int tileSize = WIDTH / size;
 
 	private HashMap<Pair<Integer, Integer>, Boolean> board;
@@ -79,8 +78,8 @@ public class Board extends JPanel implements ActionListener {
 
 	public void paint(Graphics g) {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
-		g.setColor(Color.BLACK);
-		// printrin grig lins
+		// printrin grig lines
+//		g.setColor(Color.BLACK);
 //		for (int i = 0; i < board.size(); i++) {
 //			g.drawLine((i + 1) * tileSize, 0, (i + 1) * tileSize, HEIGHT);
 //		}
@@ -112,7 +111,6 @@ public class Board extends JPanel implements ActionListener {
 			running = false;
 		} else if (!board.get(snakeHead)) {
 			if (apples.get(0).getCoordinates().equals(snakeHead)) {
-				System.out.println("ungabunga");
 				snake.eatApple(apples.get(0).getCoordinates());
 				apples.remove(0);
 			} else {
